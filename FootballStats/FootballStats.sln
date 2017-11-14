@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManipulation", "DatabaseManipulation\DatabaseManipulation.csproj", "{319BB599-2A63-46EE-9CAB-4394E0523062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManipulator", "ClassLibrary2\DatabaseManipulator.csproj", "{1104D955-64F0-4051-89EC-5CF9C1FA374A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModels", "DatabaseModels\DatabaseModels.csproj", "{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{319BB599-2A63-46EE-9CAB-4394E0523062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{319BB599-2A63-46EE-9CAB-4394E0523062}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{319BB599-2A63-46EE-9CAB-4394E0523062}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{319BB599-2A63-46EE-9CAB-4394E0523062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1104D955-64F0-4051-89EC-5CF9C1FA374A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1104D955-64F0-4051-89EC-5CF9C1FA374A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1104D955-64F0-4051-89EC-5CF9C1FA374A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1104D955-64F0-4051-89EC-5CF9C1FA374A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
