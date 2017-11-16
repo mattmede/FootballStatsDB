@@ -12,5 +12,7 @@ namespace DatabaseManipulator
         void Insert(IDatabaseEntry entry);
         void Delete(IDatabaseEntry entry);
         void Edit(IDatabaseEntry entry);
+        IDatabaseEntry SelectEntry(int id);
+        List<IDatabaseEntry> SelectMultipleEntries(List<int> ids);
     } 
 }
