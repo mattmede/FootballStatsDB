@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace DatabaseModels
 {
-    public class Player : IDatabaseEntry
+    class Team : IDatabaseEntry
     {
-        private int _id, _number;
-        private string _name;
+
+        int _id;
+        string _name;
 
         #region ' Properties '
 
@@ -18,45 +19,38 @@ namespace DatabaseModels
             get { return _id; }
         }
 
-        public int Number
-        {
-            get { return _number; }
-        }
-
         public string Name
         {
             get { return _name; }
         }
 
-        #endregion  
+        #endregion
 
         public string GetTableName()
         {
-            return "Players";
+            return "Teams";
         }
 
         public void GetFields(out List<string> fields)
         {
             fields = new List<string>();
-            fields.Add("Player_Id");
-            fields.Add("Number");
+            fields.Add("Team_Id");
             fields.Add("Name");
         }
 
         public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("Player_Id" + suffix, _id));
+            parameters.Add(new KeyValuePair<string, object>("Team_Id" + suffix, _id));
             parameters.Add(new KeyValuePair<string, object>("Name" + suffix, _name));
-            parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
 
             if (!onlyUniqueItems)
             {
                 parameters.Add(new KeyValuePair<string, object>("Name" + suffix, _name));
-                parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
             }
 
             return parameters;
         }
+
     }
 }
