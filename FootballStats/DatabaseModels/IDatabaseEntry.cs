@@ -10,5 +10,6 @@ namespace DatabaseModels
     {
         string GetTableName();
         void GetFields(out List<string> fields);
+        List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "");
     }
 }
