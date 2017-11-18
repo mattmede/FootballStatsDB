@@ -30,6 +30,15 @@ namespace DatabaseModels
 
         #endregion  
 
+        public Player ()
+        { }
+
+        public Player(int number, string name)
+        {
+            _number = number;
+            _name = name;
+        }
+
         public string GetTableName()
         {
             return "Players";
@@ -46,15 +55,8 @@ namespace DatabaseModels
         public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("Player_Id" + suffix, _id));
             parameters.Add(new KeyValuePair<string, object>("Name" + suffix, _name));
             parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
-
-            if (!onlyUniqueItems)
-            {
-                parameters.Add(new KeyValuePair<string, object>("Name" + suffix, _name));
-                parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
-            }
 
             return parameters;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using DatabaseModels;
 
 namespace DatabaseManipulator
@@ -14,5 +15,6 @@ namespace DatabaseManipulator
         void Edit(IDatabaseEntry entry);
         IDatabaseEntry SelectEntry(int id);
         List<IDatabaseEntry> SelectMultipleEntries(List<int> ids);
+        void AddParameters(SqlCommand cmd, List<KeyValuePair<string, object>> parameters);
     } 
 }
