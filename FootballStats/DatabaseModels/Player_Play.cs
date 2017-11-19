@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseModels
 {
-    class Player_Play
+    class Player_Play : IDatabaseEntry
     {
         int _id,  _player_id, _player_stat_id;
 
@@ -29,5 +29,36 @@ namespace DatabaseModels
 
         #endregion
 
+        public Player_Play()
+        { }
+
+        public Player_Play(int playerid, int playerstatid)
+        {
+            _player_id = playerid;
+            _player_stat_id = playerstatid;
+        }
+
+
+        public string GetTableName()
+        {
+            return "Player_Plays";
+        }
+
+        public void GetFields(out List<string> fields)
+        {
+            fields = new List<string>();
+            fields.Add("PP_Id");
+            fields.Add("Player_Id");
+            fields.Add("Player_Stat_Id");
+        }
+
+        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
+        {
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("Player_Id" + suffix, _player_id));
+            parameters.Add(new KeyValuePair<string, object>("Player_Stat_Id" + suffix, _player_stat_id));
+
+            return parameters;
+        }
     }
 }

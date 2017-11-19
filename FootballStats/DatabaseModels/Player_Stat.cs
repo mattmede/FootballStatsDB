@@ -78,5 +78,67 @@ namespace DatabaseModels
         }
 
         #endregion
+
+        public Player_Stat()
+        { }
+
+        public Player_Stat(int wk, int yr, int rushyrds, int passyrds, int recyards, int tds, int fumbles, int intercep_thrown, int tackles, int sacks, int forcedfumbles, int interceptions)
+        {
+            _week = wk;
+            _year = yr;
+            _rush_yards = rushyrds;
+            _pass_yards = passyrds;
+            _receiving_yards = recyards;
+            _tds = tds;
+            _fumbles = fumbles;
+            _interceptions_thrown = intercep_thrown;
+            _tackles = tackles;
+            _sacks = sacks;
+            _forced_fumbles = forcedfumbles;
+            _interceptions = interceptions;
+        }
+
+        public string GetTableName()
+        {
+            return "Player_Stats";
+        }
+
+        public void GetFields(out List<string> fields)
+        {
+            fields = new List<string>();
+            fields.Add("Player_Stat_Id");
+            fields.Add("Week");
+            fields.Add("Year");
+            fields.Add("Rush_Yards");
+            fields.Add("Pass_Yards");
+            fields.Add("Receiving_Yards");
+            fields.Add("TDs");
+            fields.Add("Fumbles");
+            fields.Add("Interceptions_Thrown");
+            fields.Add("Tackles");
+            fields.Add("Sacks");
+            fields.Add("Forced_Fumbles");
+            fields.Add("Interceptions");
+        }
+
+        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
+        {
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("Player_Stat_Id" + suffix, _id));
+            parameters.Add(new KeyValuePair<string, object>("Week" + suffix, _week));
+            parameters.Add(new KeyValuePair<string, object>("Year" + suffix, _year));
+            parameters.Add(new KeyValuePair<string, object>("Rush_Yards" + suffix, _rush_yards));
+            parameters.Add(new KeyValuePair<string, object>("Pass_Yards" + suffix, _pass_yards));
+            parameters.Add(new KeyValuePair<string, object>("Receiving_Yards" + suffix, _receiving_yards));
+            parameters.Add(new KeyValuePair<string, object>("TDs" + suffix, _tds));
+            parameters.Add(new KeyValuePair<string, object>("Fumbles" + suffix, _fumbles));
+            parameters.Add(new KeyValuePair<string, object>("Interceptions_Thrown" + suffix, _interceptions_thrown));
+            parameters.Add(new KeyValuePair<string, object>("Tackles" + suffix, _tackles));
+            parameters.Add(new KeyValuePair<string, object>("Sacks" + suffix, _sacks));
+            parameters.Add(new KeyValuePair<string, object>("Forced_Fumbles" + suffix, _forced_fumbles));
+            parameters.Add(new KeyValuePair<string, object>("Interceptions" + suffix, _interceptions));
+
+            return parameters;
+        }
     }
 }
