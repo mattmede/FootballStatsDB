@@ -30,7 +30,7 @@ for p in players:
         else:
             player =  players[p].name.replace("'", "''")
             player_number = str(players[p].number)
-            playersFile.write("('" + player + "'," + player_number + "0),\n")
+            playersFile.write("('" + player + "'," + player_number + "),\n")
             count2 = count2 + 1
             if count2 == 999:
                 insertFlag = True
