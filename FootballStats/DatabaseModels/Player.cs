@@ -49,13 +49,13 @@ namespace DatabaseModels
             fields = new List<string>();
             fields.Add("Player_Id");
             fields.Add("Number");
-            fields.Add("Name");
+            fields.Add("Player_Name");
         }
 
         public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("Name" + suffix, _name));
+            parameters.Add(new KeyValuePair<string, object>("Player_Name" + suffix, _name));
             parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
 
             return parameters;
