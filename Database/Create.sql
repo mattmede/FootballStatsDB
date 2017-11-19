@@ -1,18 +1,18 @@
 CREATE TABLE Users(
     User_Id INT PRIMARY KEY,
-    Username VARCHAR  NOT NULL UNIQUE,
-    Password VARCHAR NOT NULL
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Players(
     Player_Id INT PRIMARY KEY,
-    Name VARCHAR NOT NULL,
+    Name VARCHAR(50) NOT NULL,
     Number INT NOT NULL
 );
 
 CREATE TABLE Teams(
     Team_Id INT PRIMARY KEY,
-    Name VARCHAR NOT NULL
+    Name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Fav_Player(
