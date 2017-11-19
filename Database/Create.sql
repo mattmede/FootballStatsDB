@@ -6,13 +6,13 @@ CREATE TABLE Users(
 
 CREATE TABLE Players(
     Player_Id INT IDENTITY(1,1) PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL,
-    Number INT NOT NULL
+    Player_Name VARCHAR(50) NOT NULL,
+    Player_Number INT NOT NULL
 );
 
 CREATE TABLE Teams(
     Team_Id INT IDENTITY(1,1) PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL
+    Team_Name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Fav_Player(
