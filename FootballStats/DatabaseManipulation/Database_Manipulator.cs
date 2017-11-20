@@ -47,6 +47,8 @@ namespace DatabaseManipulation
                     command_string += ", ";
             }
 
+            parameters = entry.GetKeyValuePairs(true);
+
             command_string += " WHERE " + parameters.First().Key + " = @" + parameters.First().Key + ";"; 
 
             SqlCommand command = new SqlCommand(command_string, connection);
