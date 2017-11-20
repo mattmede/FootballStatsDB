@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseModels
 {
-    class Fav_Player : IDatabaseEntry
+    public class Fav_Player : IDatabaseEntry
     {
         int _id, _player_id, _user_id;
 
@@ -43,21 +43,44 @@ namespace DatabaseModels
             return "Fav_Player";
         }
 
-        public void GetFields(out List<string> fields)
+        public void GetFields(out List<string> fields, bool need_id = false)
         {
             fields = new List<string>();
-            fields.Add("FP_Id");
+            if(need_id)
+                fields.Add("FP_Id");
+
             fields.Add("Player_Id");
             fields.Add("User_Id");
         }
 
-        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
+        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool need_id = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
+
+            if (need_id)
+                parameters.Add(new KeyValuePair<string, object>("FP_Id", Id));
+
             parameters.Add(new KeyValuePair<string, object>("Player_Id" + suffix, _player_id));
             parameters.Add(new KeyValuePair<string, object>("User_Id" + suffix, _user_id));
 
             return parameters;
+        }
+
+        public string GetParameterString(List<KeyValuePair<string, object>> parameters, bool need_id = false, string suffix = "")
+        {
+            string parameter_string = "";
+
+            parameters = GetKeyValuePairs(need_id, suffix);
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+            {
+                if (parameter.Equals(parameters.First()))
+                    parameter_string += " @" + parameter.Key;
+                else
+                    parameter_string += ", @" + parameter.Key;
+            }
+
+            return parameter_string;
         }
 
     }

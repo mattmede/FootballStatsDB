@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseModels
 {
-    class User : IDatabaseEntry
+    public class User : IDatabaseEntry
     {
         int _id;
         string _username, _password;
@@ -44,21 +44,45 @@ namespace DatabaseModels
             return "Users";
         }
 
-        public void GetFields(out List<string> fields)
+        public void GetFields(out List<string> fields, bool need_id = false)
         {
             fields = new List<string>();
-            fields.Add("User_Id");
+            
+            if(need_id)
+                fields.Add("User_Id");
+
             fields.Add("Username");
             fields.Add("Password");
         }
 
-        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
+        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool need_id = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
+
+            if (need_id)
+                parameters.Add(new KeyValuePair<string, object>("User_Id", _id));
+
             parameters.Add(new KeyValuePair<string, object>("Username" + suffix, _username));
             parameters.Add(new KeyValuePair<string, object>("Password" + suffix, _password));
 
             return parameters;
+        }
+
+        public string GetParameterString(List<KeyValuePair<string, object>> parameters, bool need_id = false, string suffix = "")
+        {
+            string parameter_string = "";
+
+            parameters = GetKeyValuePairs(need_id, suffix);
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+            {
+                if (parameter.Equals(parameters.First()))
+                    parameter_string += " @" + parameter.Key;
+                else
+                    parameter_string += ", @" + parameter.Key;
+            }
+
+            return parameter_string;
         }
 
     }

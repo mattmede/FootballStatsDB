@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseModels
 {
-    class Team_Stat : IDatabaseEntry
+    public class Team_Stat : IDatabaseEntry
     {
         int _id, _week, _year, _wins, _losses, _rush_yards, _pass_yards, _receiving_yards, _tds, _sacks, _interceptions, _forced_fumbles;
 
@@ -97,10 +97,13 @@ namespace DatabaseModels
             return "Team_Stats";
         }
 
-        public void GetFields(out List<string> fields)
+        public void GetFields(out List<string> fields, bool need_id = false)
         {
             fields = new List<string>();
-            fields.Add("Team_Stat_Id");
+
+            if(need_id)
+                fields.Add("Team_Stat_Id");
+
             fields.Add("Week");
             fields.Add("Year");
             fields.Add("Wins");
@@ -114,10 +117,13 @@ namespace DatabaseModels
             fields.Add("Forced_Fumbles");
         }
 
-        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool onlyUniqueItems = false, string suffix = "")
+        public List<KeyValuePair<string, object>> GetKeyValuePairs(bool need_id = false, string suffix = "")
         {
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("Team_Stat_Id" + suffix, _id));
+
+            if (need_id)
+                parameters.Add(new KeyValuePair<string, object>("Team_Stat_Id", _id));
+            
             parameters.Add(new KeyValuePair<string, object>("Week" + suffix, _week));
             parameters.Add(new KeyValuePair<string, object>("Year" + suffix, _year));
             parameters.Add(new KeyValuePair<string, object>("Wins" + suffix, _wins));
@@ -131,6 +137,23 @@ namespace DatabaseModels
             parameters.Add(new KeyValuePair<string, object>("Forced_Fumbles" + suffix, _forced_fumbles));
 
             return parameters;
+        }
+
+        public string GetParameterString(List<KeyValuePair<string, object>> parameters, bool need_id = false, string suffix = "")
+        {
+            string parameter_string = "";
+
+            parameters = GetKeyValuePairs(need_id, suffix);
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+            {
+                if (parameter.Equals(parameters.First()))
+                    parameter_string += " @" + parameter.Key;
+                else
+                    parameter_string += ", @" + parameter.Key;
+            }
+
+            return parameter_string;
         }
     }
 }
