@@ -11,7 +11,7 @@ namespace DatabaseManipulation
 {
     public class Database_Manipulator
     {
-        private SqlConnection connection = new SqlConnection(@"Data Source=NATHANPC\SQLEXPRESS;Initial Catalog=FootBallStatTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        private SqlConnection connection = new SqlConnection(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=FootBallStatTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         public void Insert(IDatabaseEntry entry)
         {
