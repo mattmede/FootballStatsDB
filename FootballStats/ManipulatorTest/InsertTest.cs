@@ -1,5 +1,4 @@
 ﻿using System;
-using DatabaseManipulator;
 using DatabaseManipulation;
 using DatabaseModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -68,7 +67,7 @@ namespace ManipulatorTest
         [TestMethod]
         public void Insert_Team_Play_Test()
         {
-            Player_Play team_play = new Player_Play(1,1);
+            Team_Play team_play = new Team_Play(1,1);
             Database_Manipulator manipulator = new Database_Manipulator();
             manipulator.Insert(team_play);
         }
