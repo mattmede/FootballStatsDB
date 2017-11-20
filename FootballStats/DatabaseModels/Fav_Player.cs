@@ -32,10 +32,11 @@ namespace DatabaseModels
         public Fav_Player()
         { }
 
-        public Fav_Player(int player_id, int user_id)
+        public Fav_Player(int player_id, int user_id, int id = 0)
         {
             _player_id = player_id;
             _user_id = user_id;
+            _id = id;
         }
 
         public string GetTableName()

@@ -32,10 +32,11 @@ namespace DatabaseModels
         public Player_Play()
         { }
 
-        public Player_Play(int playerid, int playerstatid)
+        public Player_Play(int playerid, int playerstatid, int id = 0)
         {
             _player_id = playerid;
             _player_stat_id = playerstatid;
+            _id = id;
         }
 
 

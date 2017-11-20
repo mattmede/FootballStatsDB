@@ -33,10 +33,11 @@ namespace DatabaseModels
         public User()
         { }
 
-        public User(string username, string password)
+        public User(string username, string password, int id = 0)
         {
             _username = username;
             _password = password;
+            _id = id;
         }
 
         public string GetTableName()

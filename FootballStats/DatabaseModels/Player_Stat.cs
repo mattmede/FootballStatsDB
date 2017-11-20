@@ -82,7 +82,7 @@ namespace DatabaseModels
         public Player_Stat()
         { }
 
-        public Player_Stat(int wk, int yr, int rushyrds, int passyrds, int recyards, int tds, int fumbles, int intercep_thrown, int tackles, int sacks, int forcedfumbles, int interceptions)
+        public Player_Stat(int wk, int yr, int rushyrds, int passyrds, int recyards, int tds, int fumbles, int intercep_thrown, int tackles, int sacks, int forcedfumbles, int interceptions, int id = 0)
         {
             _week = wk;
             _year = yr;
@@ -96,6 +96,7 @@ namespace DatabaseModels
             _sacks = sacks;
             _forced_fumbles = forcedfumbles;
             _interceptions = interceptions;
+            _id = id;
         }
 
         public string GetTableName()

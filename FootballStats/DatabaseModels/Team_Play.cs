@@ -32,10 +32,11 @@ namespace DatabaseModels
         public Team_Play()
         { }
 
-        public Team_Play(int teamid, int teamstatid)
+        public Team_Play(int teamid, int teamstatid, int id = 0)
         {
             _team_id = teamid;
             _team_stat_id = teamstatid;
+            _id = id;
         }
 
         public string GetTableName()

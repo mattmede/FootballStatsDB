@@ -33,10 +33,11 @@ namespace DatabaseModels
         public Player ()
         { }
 
-        public Player(int number, string name)
+        public Player(int number, string name, int id = 0)
         {
             _number = number;
             _name = name;
+            _id = id;
         }
 
         public string GetTableName()

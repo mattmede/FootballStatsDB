@@ -29,9 +29,10 @@ namespace DatabaseModels
         public Team()
         { }
 
-        public Team(string name)
+        public Team(string name, int id = 0)
         {
             _name = name;
+            _id = id;
         }
 
         public string GetTableName()

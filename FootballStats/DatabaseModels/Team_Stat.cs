@@ -77,7 +77,7 @@ namespace DatabaseModels
         public Team_Stat()
         { }
 
-        public Team_Stat(int wk, int yr, int wins, int losses, int rushyrds, int passyrds, int recyards, int tds, int sacks, int forcedfumbles, int interceptions)
+        public Team_Stat(int wk, int yr, int wins, int losses, int rushyrds, int passyrds, int recyards, int tds, int sacks, int forcedfumbles, int interceptions, int id = 0)
         {
             _week = wk;
             _year = yr;
@@ -90,6 +90,7 @@ namespace DatabaseModels
             _sacks = sacks;
             _forced_fumbles = forcedfumbles;
             _interceptions = interceptions;
+            _id = id;
         }
 
         public string GetTableName()
