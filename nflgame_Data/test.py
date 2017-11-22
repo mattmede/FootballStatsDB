@@ -1,12 +1,5 @@
 import nflgame
 
-# game = nflgame.games(2016, week=[1])
-# players = nflgame.combine(game)
-
-# for p in players:
-#     print p, p.formatted_stats()
-
-
 #Prints player name and number
 playersFile = open('insert_players.sql', 'w')
 playersFile.write("INSERT INTO Players (Player_Name, Player_Number) VALUES \n")
@@ -53,3 +46,20 @@ teamsFile.close()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+# game = nflgame.games(2016, week=[1])
+# players = nflgame.combine(game)
+
+# for p in players:
+#     print p, p.formatted_stats()

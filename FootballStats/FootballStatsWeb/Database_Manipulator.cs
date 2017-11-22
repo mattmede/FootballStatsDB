@@ -101,40 +101,6 @@ namespace DatabaseManipulation
             return new List<IDatabaseEntry>();
         }
 
-        public List<Player> SelectAllEntries()
-        {
-            SqlCommand command = new SqlCommand("SELECT Player_Number, Player_Name, Player_Id FROM Players", connection);
-
-            var players = new List<Player>();
-
-            connection.Open();
-            var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                players.Add(new Player(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2)));
-            }
-            connection.Close();
-
-            return players;
-        }
-
-        public List<Team> SelectAllTeams()
-        {
-            SqlCommand command = new SqlCommand("SELECT Team_Name, Team_Id FROM Teams", connection);
-
-            var teams = new List<Team>();
-
-            connection.Open();
-            var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                teams.Add(new Team(reader.GetString(0), reader.GetInt32(1)));
-            }
-            connection.Close();
-
-            return teams;
-        }
-
         private void AddParameters(SqlCommand cmd, List<KeyValuePair<string, object>> parameters)
         {
             foreach (KeyValuePair<string, object> pair in parameters)

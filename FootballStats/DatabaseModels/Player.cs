@@ -8,17 +8,17 @@ namespace DatabaseModels
 {
     public class Player : IDatabaseEntry
     {
-        private int _id, _number;
+        private int? _id, _number;
         private string _name;
 
         #region ' Properties '
 
-        public int Id
+        public int? Id
         {
             get { return _id; }
         }
 
-        public int Number
+        public int? Number
         {
             get { return _number; }
         }
@@ -33,7 +33,7 @@ namespace DatabaseModels
         public Player ()
         { }
 
-        public Player(int number, string name, int id = 0)
+        public Player(int number, string name, int? id = 0)
         {
             _number = number;
             _name = name;
@@ -51,7 +51,7 @@ namespace DatabaseModels
             if (need_id)
                 fields.Add("Player_Id");
 
-            fields.Add("Number");
+            fields.Add("Player_Number");
             fields.Add("Player_Name");
         }
 
@@ -62,7 +62,7 @@ namespace DatabaseModels
             if (need_id)
                 parameters.Add(new KeyValuePair<string, object>("Player_Id", _id));
 
-            parameters.Add(new KeyValuePair<string, object>("Number" + suffix, _number));
+            parameters.Add(new KeyValuePair<string, object>("Player_Number" + suffix, _number));
             parameters.Add(new KeyValuePair<string, object>("Player_Name" + suffix, _name));
 
             return parameters;
