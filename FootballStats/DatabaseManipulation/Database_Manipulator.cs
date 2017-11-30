@@ -13,6 +13,9 @@ namespace DatabaseManipulation
     {
         private SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
+        private SqlConnection connection2 = new SqlConnection(@"Server=tcp:footballstatsdb.database.windows.net,1433;Initial Catalog=FootballStatsDB;Persist Security Info=False;User ID={mattmede};Password={Sltbmrcv23};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+
         public void Insert(IDatabaseEntry entry)
         {
             string command_string = "INSERT INTO " + entry.GetTableName();
