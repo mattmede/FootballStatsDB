@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModels", "DatabaseModels\DatabaseModels.csproj", "{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}"
 EndProject
@@ -9,27 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManipulation", "Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManipulatorTest", "ManipulatorTest\ManipulatorTest.csproj", "{130E3320-42B5-4785-B690-E7CD1EC55563}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DBWebsite", "..\..\..\Visual Studio 2017\WebSites\DBWebsite\", "{CA3763B7-DE02-4410-910E-2AAA835222E1}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DBWebsite(1)", "DBWebsite\", "{A167EB2A-0C71-4CF7-AB4E-353888BE80F4}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
-		ProjectReferences = "{6b2a9b22-5c1d-4cc2-aa45-38996c63af00}|DatabaseManipulation.dll;{7A6D823A-EDC8-4CEE-B9C6-082C8AC70724}|DatabaseModels.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_50337"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\Visual Studio 2017\WebSites\DBWebsite\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50337\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_59062"
+		Debug.AspNetCompiler.PhysicalPath = "DBWebsite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59062\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_50337"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\Visual Studio 2017\WebSites\DBWebsite\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50337\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_59062"
+		Release.AspNetCompiler.PhysicalPath = "DBWebsite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59062\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "50337"
-		SlnRelativePath = "..\..\..\Visual Studio 2017\WebSites\DBWebsite\"
-		DefaultWebSiteLanguage = "Visual C#"
+		VWDPort = "59062"
+		SlnRelativePath = "DBWebsite\"
 	EndProjectSection
 EndProject
 Global
@@ -50,10 +48,10 @@ Global
 		{130E3320-42B5-4785-B690-E7CD1EC55563}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{130E3320-42B5-4785-B690-E7CD1EC55563}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{130E3320-42B5-4785-B690-E7CD1EC55563}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA3763B7-DE02-4410-910E-2AAA835222E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA3763B7-DE02-4410-910E-2AAA835222E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA3763B7-DE02-4410-910E-2AAA835222E1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA3763B7-DE02-4410-910E-2AAA835222E1}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{A167EB2A-0C71-4CF7-AB4E-353888BE80F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A167EB2A-0C71-4CF7-AB4E-353888BE80F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A167EB2A-0C71-4CF7-AB4E-353888BE80F4}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A167EB2A-0C71-4CF7-AB4E-353888BE80F4}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

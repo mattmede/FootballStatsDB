@@ -1,0 +1,10 @@
+﻿@{
+
+    if (Session["Username"] != null && Session["Username"].ToString() !="") {
+        Session["Username"] = null;
+        Response.Redirect("~/");
+       
+    } else {
+        Response.Redirect("~/");
+    }
+}

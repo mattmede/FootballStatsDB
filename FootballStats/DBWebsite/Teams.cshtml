@@ -1,0 +1,19 @@
+﻿@using DatabaseModels;
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Football Stats DB";
+    var teams = new LoadTeams();
+}
+<h2>Teams</h2>
+
+<table class="center">
+    <tr>
+        <th>Team Name</th>
+    </tr>
+    @foreach (Team t in teams.GetTeams())
+    {
+        <tr>
+            <td>@t.Name</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,27 @@
+﻿@using DatabaseModels;
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Edit User";
+
+
+    var user = new UserInfo();
+    var myUser = new User();
+    if (Session["Username"] != null)
+    {
+        myUser = user.getUser(Session["Username"].ToString());
+    }
+}
+
+<h1>@Page.Title</h1>
+<form>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" value=@myUser.Username />
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" value=@myUser.Password />
+
+    <br />
+
+    <button type="button" onClick="@user.getUser(myUser.Username)">Save Changes</button>
+    <button type="button">Delete User</button>
+</form>

@@ -1,0 +1,79 @@
+﻿@using DatabaseModels
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Log in";
+
+    var thisLogin = new Login();
+
+    // Initialize general page variables
+    var username = "";
+    var password = "";
+    var success = false;
+
+    if (IsPost && Validation.IsValid())
+    {
+        username = Request.Form["username"];
+        password = Request.Form["password"];
+        success = thisLogin.submitLogin(username, password);
+        if (success)
+        {
+            Session["Username"] = username;
+
+            Response.Redirect("~/");
+        }
+        else
+        {
+            username = "";
+            password = "";
+        }
+    }
+
+    Validation.RequireField("username", "You must enter a valid username.");
+    Validation.RequireField("password", "You must enter a valid password.");
+
+    var returnUrl = Request.QueryString["ReturnUrl"];
+    if (returnUrl.IsEmpty()) {
+        // Some external login providers always require a return URL value
+        returnUrl = Href("~/");
+    }
+}
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+</hgroup>
+
+<section>
+    <h2>Log in to a Football Sats DB account.</h2>
+    <form method="post">
+        @AntiForgery.GetHtml()
+        @* If one or more validation errors exist, show an error *@
+        @Html.ValidationSummary("Log in was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
+
+        <fieldset>
+            <legend>Log in to Your Account</legend>
+            <ol>
+                <li class="email">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="@Request.Form["username"]" @Validation.For("username") />
+                    @* Write any user name validation errors to the page *@
+                    @Html.ValidationMessage("username")
+                </li>
+                <li class="password">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" value="@Request.Form["password"]" @Validation.For("password")/>
+                    @* Write any password validation errors to the page *@
+                    @Html.ValidationMessage("password")
+                </li>
+            </ol>
+            <input type="submit" value="Log in" />
+        </fieldset>
+    </form>
+    <p>
+        <a href="~/Account/Register">Don't have a Account?</a>
+    </p>
+</section>

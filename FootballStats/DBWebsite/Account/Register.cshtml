@@ -1,0 +1,92 @@
+﻿@using DatabaseModels;
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Register";
+
+    // Initialize general page variables
+    var username = "";
+    var password = "";
+    var confirmPassword = "";
+    var success = false;
+
+    var thisNewUser = new Login();
+
+    // Setup validation
+    Validation.RequireField("username", "You must specify an username address.");
+    Validation.RequireField("password", "Password cannot be blank.");
+    Validation.Add("confirmPassword",
+        Validator.EqualsTo("password", "Password and confirmation password do not match."));
+    Validation.Add("password",
+        Validator.StringLength(
+            maxLength: Int32.MaxValue,
+            minLength: 6,
+            errorMessage: "Password must be at least 6 characters"));
+
+    // If this is a POST request, validate and process data
+    if (IsPost) {
+        AntiForgery.Validate();
+        username = Request.Form["username"];
+        password = Request.Form["password"];
+        confirmPassword = Request.Form["confirmPassword"];
+
+        // Validate the user's captcha answer
+        // if (!ReCaptcha.Validate("PRIVATE_KEY")) {
+        //     ModelState.AddError("recaptcha", "Captcha response was not correct");
+        // }
+
+        // If all information is valid, create a new account
+        if (Validation.IsValid()) {
+            success = thisNewUser.submitNewAccount(username, password,confirmPassword);
+            if (success)
+            {
+                Response.Redirect("~/");
+            }
+            else
+            {
+                username = "";
+                password = "";
+            }
+        }
+    }
+}
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+<form method="post">
+    @AntiForgery.GetHtml()
+    @* If at least one validation error exists, notify the user *@
+    @Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.", excludeFieldErrors: true, htmlAttributes: null)
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li class="username">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="@username" @Validation.For("username") />
+                @* Write any username validation errors to the page *@
+                @Html.ValidationMessage("username")
+            </li>
+            <li class="password">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" @Validation.For("password") />
+                @* Write any password validation errors to the page *@
+                @Html.ValidationMessage("password")
+            </li>
+            <li class="confirm-password">
+                <label for="confirmPassword">Confirm password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword") />
+                @* Write any password validation errors to the page *@
+                @Html.ValidationMessage("confirmPassword")
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+</form>
