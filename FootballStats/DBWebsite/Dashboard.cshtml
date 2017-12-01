@@ -5,7 +5,12 @@
 
 <h1>@Page.Title</h1>
 
-
+@if (Session["Username"] == null)
+{
+    <h3><a href="~/Account/Login.cshtml">Login</a> to view favorite players and teams.</h3>
+}
+else
+{
 <h2>Favorite Players</h2>
 <table class="center">
     <tr>
@@ -27,3 +32,4 @@
         <th></th>
     </tr>
 </table>
+}
