@@ -2,31 +2,40 @@
 @using System.Web.Services;
 @using System.Web.Script.Services;
 @{
-        Layout = "~/_SiteLayout.cshtml";
-        Page.Title = "Edit User";
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Edit User";
 
 
-        var user = new UserInfo();
-        var myUser = new User();
-        if (Session["Username"] != null)
+    var user = new UserInfo();
+    var myUser = new User();
+    var username = "";
+    var password = "";
+
+    if (Session["Username"] != null)
+    {
+        myUser = user.getUser(Session["Username"].ToString());
+    }
+
+    if (IsPost)
+    {
+        switch (Request.Form["btn"])
         {
-            myUser = user.getUser(Session["Username"].ToString());
-        }
-
-        if (IsPost)
-        {
-            switch (Request.Form["btn"])
-            {
-                case "Save Changes":
-
+            case "Save Changes":
+                username = Request.Form["username"];
+                password = Request.Form["password"];
+                UserInfo.updateUser(username, password, myUser);
+                Session["Username"] = username;
+                Response.Redirect("~/User");
                 break;
 
-                case "Delete User":
-                UserInfo.deleteUser();
+            case "Delete User":
+                UserInfo.deleteUser(myUser.Username);
+                Session["Username"] = null;
+                Response.Redirect("~/");
                 break;
-            }
-
         }
+
+    }
     }
 
 <h1>@Page.Title</h1>

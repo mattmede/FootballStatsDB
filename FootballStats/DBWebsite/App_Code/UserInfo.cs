@@ -70,17 +70,74 @@ public class UserInfo
 
     }
 
-    public static void deleteUser()
+    public static void deleteUser(string username)
     {
         //Couldn't figure out your insert b/c the IDatabase entry it takes in
         //So this is hard coded and should be changed when we get time to fiddle with it
 
-        string command_string = "DELETE TOP (1) FROM Users";
+        int? id = null;
+
+        string command_string = "SELECT User_Id FROM Users WHERE Username = \'" + username + "\'";
+            
+            
+        //"DELETE TOP (1) FROM Users";
 
         SqlCommand command = new SqlCommand(command_string, connection);
 
         connection.Open();
         var reader = command.ExecuteReader();
+        var user = new User();
+        while (reader.Read())
+        {
+            id = reader.GetInt32(0);
+
+        }
+        connection.Close();
+
+        if(id != null)
+        {
+            command_string = "DELETE FROM Users WHERE User_Id = " + id + " AND Username = \'" + username +"\'";
+        }
+
+        command = new SqlCommand(command_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+        connection.Close();
+        //close connection
+
+    }
+
+    public static void updateUser(string username, string password, User user)
+    {
+        //Couldn't figure out your insert b/c the IDatabase entry it takes in
+        //So this is hard coded and should be changed when we get time to fiddle with it
+
+        int? id = null;
+
+        string command_string = "SELECT User_Id FROM Users WHERE Username = \'" + user.Username + "\'";
+
+        SqlCommand command = new SqlCommand(command_string, connection);
+
+        connection.Open();
+        var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            id = reader.GetInt32(0);
+
+        }
+        connection.Close();
+
+        if (id != null)
+        {
+            command_string = "UPDATE Users SET Username = \'" + username + "\', Password = \'" + password +
+                "\' WHERE User_Id = " + user.Id;
+        }
+
+        command = new SqlCommand(command_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
         connection.Close();
         //close connection
 

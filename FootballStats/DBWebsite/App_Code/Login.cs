@@ -35,7 +35,7 @@ public class Login
             connection.Close();
             return false;
         }
-
+        connection.Close();
         string command_string = "INSERT INTO Users (Username, Password) VALUES (\'" + username + "\',\'" + password + "\');";
 
         command = new SqlCommand(command_string, connection);
