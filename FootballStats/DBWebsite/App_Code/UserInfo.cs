@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using DatabaseModels;
+using System.Web.Services;
 
 /// <summary>
 /// Summary description for User
@@ -17,7 +18,7 @@ public class UserInfo
         //
     }
 
-    private SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    private  static SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
     public User getFirstUser()
     {
@@ -69,7 +70,7 @@ public class UserInfo
 
     }
 
-    public void deleteUser()
+    public static void deleteUser()
     {
         //Couldn't figure out your insert b/c the IDatabase entry it takes in
         //So this is hard coded and should be changed when we get time to fiddle with it

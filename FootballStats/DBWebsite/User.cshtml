@@ -1,19 +1,36 @@
 ﻿@using DatabaseModels;
+@using System.Web.Services;
+@using System.Web.Script.Services;
 @{
-    Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Edit User";
+        Layout = "~/_SiteLayout.cshtml";
+        Page.Title = "Edit User";
 
 
-    var user = new UserInfo();
-    var myUser = new User();
-    if (Session["Username"] != null)
-    {
-        myUser = user.getUser(Session["Username"].ToString());
+        var user = new UserInfo();
+        var myUser = new User();
+        if (Session["Username"] != null)
+        {
+            myUser = user.getUser(Session["Username"].ToString());
+        }
+
+        if (IsPost)
+        {
+            switch (Request.Form["btn"])
+            {
+                case "Save Changes":
+
+                break;
+
+                case "Delete User":
+                UserInfo.deleteUser();
+                break;
+            }
+
+        }
     }
-}
 
 <h1>@Page.Title</h1>
-<form>
+<form method="post">
     <label for="username">Username</label>
     <input type="text" id="username" name="username" value=@myUser.Username />
 
@@ -22,6 +39,8 @@
 
     <br />
 
-    <button type="button" onClick="@user.getUser(myUser.Username)">Save Changes</button>
-    <button type="button">Delete User</button>
+    <input type="submit" name="btn" value="Save Changes"/>
+    <input type="submit" name="btn" value="Delete User" />
 </form>
+
+
