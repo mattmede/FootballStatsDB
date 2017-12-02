@@ -2,6 +2,7 @@
 @{
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Football Stats DB";
+<<<<<<< HEAD
     var teams = LoadTeams.GetTeams();
     var last = teams.Count - 1;
     var count = 0;
@@ -11,22 +12,19 @@
         Session["TeamSearch"] = Request.Form["search"];
         Response.Redirect("~/Teams");
     }
+=======
+    var teams = new LoadTeams();
+>>>>>>> acb7b8edfb000905aba41ced8ee20dafb8b1466b
 }
-
-<form method="post" style="float:right">
-    <input type="text" placeholder="Search" name="search" />
-    <input type="submit" name="Submit" />
-</form>
-
 <h2>Teams</h2>
 
 <table class="center">
     <tr>
         <th>Team Name</th>
-        <th>Favorites</th>
     </tr>
     @foreach (Team t in teams)
     {
+<<<<<<< HEAD
         if (Session["TeamSearch"] != null)
         {
             var team = Session["TeamSearch"].ToString();
@@ -50,5 +48,10 @@
             Session["TeamSearch"] = null;
         }
         count++;
+=======
+        <tr>
+            <td>@t.Name</td>
+        </tr>
+>>>>>>> acb7b8edfb000905aba41ced8ee20dafb8b1466b
     }
 </table>
