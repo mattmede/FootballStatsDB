@@ -4,18 +4,25 @@
     Page.Title = "Football Stats DB";
     var players = new LoadPlayers();
 }
+<form style="float:right">
+    <input type="text" placeholder="Search" />
+    <button type="submit">Search</button>
+</form>
+
 <h2>Players</h2>
 
 <table>
     <tr>
         <th>Player Name</th>
         <th>Player Number</th>
+        <th>Favorites</th>
     </tr>
     @foreach (Player p in players.GetPlayers())
     {
         <tr>
             <td>@p.Name</td>
-            <td>@p.Number</td>
+            <td align="center">@p.Number</td>
+            <td align="center"><button type="button">Add</button></td>
         </tr>
     }
 </table>
