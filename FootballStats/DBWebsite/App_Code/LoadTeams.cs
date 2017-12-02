@@ -12,7 +12,7 @@ public class LoadTeams
 {
     public LoadTeams() { }
 
-    public List<Team> GetTeams()
+    public static List<Team> GetTeams()
     {
         var dbManipulator = new Database_Manipulator();
         var teams = new List<Team>();

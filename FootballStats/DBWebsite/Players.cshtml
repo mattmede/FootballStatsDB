@@ -2,8 +2,22 @@
 @{
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Football Stats DB";
-    var players = new LoadPlayers();
+    var players = LoadPlayers.GetPlayers();
+    var last = players.Count - 1;
+    var count = 0;
+
+    if (IsPost)
+    {
+        Session["PlayerSearch"] = Request.Form["search"];
+        Response.Redirect("~/Players");
+    }
 }
+
+<form method="post" style="float:right">
+    <input type="text" placeholder="Search" name="search" />
+    <input type="submit" name="Submit" />
+</form>
+
 <h2>Players</h2>
 
 <table>
@@ -11,11 +25,32 @@
         <th>Player Name</th>
         <th>Player Number</th>
     </tr>
-    @foreach (Player p in players.GetPlayers())
+    @foreach (Player p in players)
     {
-        <tr>
-            <td>@p.Name</td>
-            <td>@p.Number</td>
-        </tr>
+        if (Session["PlayerSearch"] != null)
+        {
+            var player = Session["PlayerSearch"].ToString();
+            if (p.Name.IndexOf(@player, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>@p.Number</td>
+                    <td align="center"><button type="button">Add</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Number</td>
+                <td align="center"><button type="button">Add</button></td>
+            </tr>
+        }
+        if(count == last)
+        {
+            Session["PlayerSearch"] = null;
+        }
+        count++;
     }
 </table>

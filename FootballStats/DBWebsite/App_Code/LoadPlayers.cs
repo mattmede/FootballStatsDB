@@ -12,7 +12,7 @@ public class LoadPlayers
 {
     public LoadPlayers() { }
 
-    public List<Player> GetPlayers()
+    public  static List<Player> GetPlayers()
     {
         var dbManipulator = new Database_Manipulator();
         var players = new List<Player>();
