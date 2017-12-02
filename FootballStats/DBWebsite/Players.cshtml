@@ -24,6 +24,7 @@
     <tr>
         <th>Player Name</th>
         <th>Player Number</th>
+        <th>Favorites</th>
     </tr>
     @foreach (Player p in players)
     {
@@ -34,7 +35,7 @@
             {
                 <tr>
                     <td>@p.Name</td>
-                    <td>@p.Number</td>
+                    <td align="center">@p.Number</td>
                     <td align="center"><button type="button">Add</button></td>
                 </tr>
             }
