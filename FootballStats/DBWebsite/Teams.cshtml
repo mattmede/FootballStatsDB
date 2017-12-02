@@ -3,17 +3,45 @@
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Football Stats DB";
     var teams = new LoadTeams();
+
+    if (IsPost)
+    {
+        Session["TeamSearch"] = Request.Form["search"];
+        Response.Redirect("~/Teams");
+    }
 }
+
+<form method="post" style="float:right">
+    <input type="text" placeholder="Search" name="search" />
+    <input type="submit" name="Submit" />
+</form>
+
 <h2>Teams</h2>
 
 <table class="center">
     <tr>
         <th>Team Name</th>
+        <th>Favorites</th>
     </tr>
     @foreach (Team t in teams.GetTeams())
     {
-        <tr>
-            <td>@t.Name</td>
-        </tr>
+        if (Session["TeamSearch"] != null)
+        {
+            var team = Session["TeamSearch"].ToString();
+            if (t.Name.IndexOf(@team, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                <tr>
+                    <td>@t.Name</td>
+                    <td align="center"><button type="button">Add</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>@t.Name</td>
+                <td align="center"><button type="button">Add</button></td>
+            </tr>
+        }
     }
 </table>
