@@ -11,12 +11,12 @@ namespace DatabaseManipulation
 {
     public class Database_Manipulator
     {
-        private SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        private SqlConnection connection = new SqlConnection(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         private SqlConnection connection2 = new SqlConnection(@"Server=tcp:footballstatsdb.database.windows.net,1433;Initial Catalog=FootballStatsDB;Persist Security Info=False;User ID={mattmede};Password={Sltbmrcv23};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
 
-        public void Insert(IDatabaseEntry entry)
+        public int Insert(IDatabaseEntry entry)
         {
             string command_string = "INSERT INTO " + entry.GetTableName();
             List<string> fields = new List<string>();
@@ -24,7 +24,7 @@ namespace DatabaseManipulation
 
             AddFieldNames(ref command_string, fields);
 
-            command_string += " VALUES (";
+            command_string += " OUTPUT INSERTED." + entry.GetKeyValuePairs(true)[0].Key  +" VALUES (";
             command_string += entry.GetParameterString(entry.GetKeyValuePairs());
             command_string += ");";
 
@@ -33,8 +33,9 @@ namespace DatabaseManipulation
             AddParameters(command, entry.GetKeyValuePairs(false));
 
             connection.Open();
-            command.ExecuteNonQuery();
+            int id = (int)command.ExecuteScalar();
             connection.Close();
+            return id;
         }
 
         public void Edit(IDatabaseEntry entry)
