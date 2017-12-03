@@ -1,6 +1,18 @@
-﻿@{
+﻿@using DatabaseModels;
+@{
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Dashboard";
+
+    var dashboard = new Dashboard();
+    List<Player> players = new List<Player>();
+    List<Team> teams = new List<Team>();
+
+    if (Session["username"] != null)
+    {
+        players = dashboard.getFavoritePlayers(Session["username"].ToString());
+        teams = dashboard.getFavoriteTeams(Session["username"].ToString());
+    }
+
 }
 
 <h1>@Page.Title</h1>
@@ -15,11 +27,22 @@ else
 <table class="center">
     <tr>
         <th>Player</th>
+        <th>Number</th>
         <th>Team</th>
         <th>Total Yards</th>
         <th>Total Tds</th>
         <th></th>
     </tr>
+    @foreach(Player p in players)
+    {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Number</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
 </table>
 
 <h2>Favorite Teams</h2>
@@ -31,5 +54,14 @@ else
         <th>Total Tds</th>
         <th></th>
     </tr>
+    @foreach(Team t in teams)
+    {
+        <tr>
+            <td>@t.Name</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
 </table>
 }
