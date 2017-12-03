@@ -23,45 +23,58 @@
 }
 else
 {
-<h2>Favorite Players</h2>
-<table class="center">
-    <tr>
-        <th>Player</th>
-        <th>Number</th>
-        <th>Team</th>
-        <th>Total Yards</th>
-        <th>Total Tds</th>
-        <th></th>
-    </tr>
-    @foreach(Player p in players)
+    <h2>Favorite Players</h2>
+    if (!players.Any())
     {
-        <tr>
-            <td>@p.Name</td>
-            <td>@p.Number</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <h3>Add favorite players <a href="~/Players.cshtml">here</a>.</h3>
     }
-</table>
-
-<h2>Favorite Teams</h2>
-<table class="center">
-    <tr>
-        <th>Team</th>
-        <th>Record</th>
-        <th>Total Yards</th>
-        <th>Total Tds</th>
-        <th></th>
-    </tr>
-    @foreach(Team t in teams)
+    else
     {
-        <tr>
-            <td>@t.Name</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <table class="center">
+            <tr>
+                <th>Player</th>
+                <th>Number</th>
+                <th>Team</th>
+                <th>Total Yards</th>
+                <th>Total Tds</th>
+                <th></th>
+            </tr>
+            @foreach (Player p in players)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>@p.Number</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </table>
     }
-</table>
+    <h2>Favorite Teams</h2>
+    if (!teams.Any())
+    {
+        <h3>Add favorite teams <a href="~/Teams.cshtml">here</a>.</h3>
+    }
+    else
+    {
+        <table class="center">
+            <tr>
+                <th>Team</th>
+                <th>Record</th>
+                <th>Total Yards</th>
+                <th>Total Tds</th>
+                <th></th>
+            </tr>
+            @foreach (Team t in teams)
+            {
+                <tr>
+                    <td>@t.Name</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </table>
+    }
 }
