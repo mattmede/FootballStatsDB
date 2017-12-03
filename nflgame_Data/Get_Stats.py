@@ -10,7 +10,9 @@ for game in games:
     game_stats = game.max_player_stats()
 
     for stat in game_stats:
-        data_file.write(stat.name)
+        data_file.write(str(stat.player))
+        data_file.write(" Team: ")
+        data_file.write(str(stat.team))
         data_file.write(" ")
         data_file.write(str(stat.formatted_stats()))
         data_file.write("\n")
