@@ -24,6 +24,7 @@ for week in range(1,18):
             player_stats_file.write(str(stat.formatted_stats()))
             player_stats_file.write("\n")
         
+        team_stats_file.write("\n")
         team_stats_file.write(str(game.home))
         team_stats_file.write(" Week: ")
         team_stats_file.write(str(week))
