@@ -37,6 +37,7 @@ else
                 <th>Team</th>
                 <th>Total Yards</th>
                 <th>Total Tds</th>
+                <th>Remove</th>
                 <th></th>
             </tr>
             @foreach (Player p in players)
@@ -46,7 +47,7 @@ else
                     <td>@p.Number</td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td><button type="button">Delete</button></td>
                 </tr>
             }
         </table>
@@ -64,7 +65,7 @@ else
                 <th>Record</th>
                 <th>Total Yards</th>
                 <th>Total Tds</th>
-                <th></th>
+                <th>Remove</th>
             </tr>
             @foreach (Team t in teams)
             {
@@ -73,6 +74,7 @@ else
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td><button type="button">Remove</button></td>
                 </tr>
             }
         </table>
