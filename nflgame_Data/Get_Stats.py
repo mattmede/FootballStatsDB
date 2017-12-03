@@ -4,16 +4,16 @@ import nflgame
 data_file = open('data.txt', 'w')
 
 games = nflgame.games(2016)
-game_stats = nflgame.combine_play_stats(games)
-count = 0
 
+#Gets the max_stats for each play in each game of the 2016 season and writes them to data.txt
+for game in games:
+    game_stats = game.max_player_stats()
 
-for player in game_stats:
-    data_file.write(player.name)
-    data_file.write(" ")
-    data_file.write(str(player.stats))
-    data_file.write("\n")
-    count = count + 1
+    for stat in game_stats:
+        data_file.write(stat.name)
+        data_file.write(" ")
+        data_file.write(str(stat.formatted_stats()))
+        data_file.write("\n")
 
 data_file.close()
 # game = nflgame.games(2016, week=[1])
