@@ -1,4 +1,3 @@
-
 DEN Week: 1 TeamStats(first_downs=21, total_yds=307, passing_yds=159, rushing_yds=148, penalty_cnt=4, penalty_yds=22, turnovers=3, punt_cnt=3, punt_yds=140, punt_avg=43, pos_time=<nflgame.game.PossessionTime object at 0x1063f1990>)
 CAR Week: 1 TeamStats(first_downs=21, total_yds=333, passing_yds=176, rushing_yds=157, penalty_cnt=8, penalty_yds=85, turnovers=1, punt_cnt=4, punt_yds=252, punt_avg=47, pos_time=<nflgame.game.PossessionTime object at 0x1063f19d0>)
 ATL Week: 1 TeamStats(first_downs=19, total_yds=374, passing_yds=322, rushing_yds=52, penalty_cnt=7, penalty_yds=74, turnovers=0, punt_cnt=5, punt_yds=193, punt_avg=39, pos_time=<nflgame.game.PossessionTime object at 0x1063f1a90>)

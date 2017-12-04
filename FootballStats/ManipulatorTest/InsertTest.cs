@@ -59,7 +59,7 @@ namespace ManipulatorTest
         [TestMethod]
         public void Insert_Team_Stat_Test()
         {
-            Team_Stat team_Stat = new Team_Stat(0,0,0,0,0,0,0,0,0,0,0);
+            Team_Stat team_Stat = new Team_Stat(0,0,0,0,0,0,0,0,0,0,0,0);
             Database_Manipulator manipulator = new Database_Manipulator();
             manipulator.Insert(team_Stat);
         }

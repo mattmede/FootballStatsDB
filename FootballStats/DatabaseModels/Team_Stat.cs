@@ -8,7 +8,7 @@ namespace DatabaseModels
 {
     public class Team_Stat : IDatabaseEntry
     {
-        int _id, _week, _year, _wins, _losses, _rush_yards, _pass_yards, _receiving_yards, _tds, _sacks, _interceptions, _forced_fumbles;
+        int _id, _week, _year, _rush_yards, _pass_yards, _first_downs, _total_yards, _penalty_count, _penalty_yards, _turnovers, _punt_count, _punt_yards, _punt_average;
 
         #region ' Properties '
 
@@ -27,16 +27,6 @@ namespace DatabaseModels
             get { return _year; }
         }
 
-        public int Wins
-        {
-            get { return _wins; }
-        }
-
-        public int Losses
-        {
-            get { return _losses; }
-        }
-
         public int Rush_Yards
         {
             get { return _rush_yards; }
@@ -47,49 +37,65 @@ namespace DatabaseModels
             get { return _pass_yards; }
         }
 
-        public int Receiving_Yards
+        public int First_Downs
         {
-            get { return _receiving_yards; }
+            get { return _first_downs; }
         }
 
-        public int TDs
+        public int Total_Yards
         {
-            get { return _tds; }
+            get { return _total_yards; }
         }
 
-        public int Sacks
+        public int Penalty_Count
         {
-            get { return _sacks; }
+            get { return _penalty_count; }
         }
 
-        public int Interceptions
+        public int Penalty_Yards
         {
-            get { return _interceptions; }
+            get { return _penalty_yards; }
         }
 
-        public int Forced_Fumbles
+        public int Turnovers
         {
-            get { return _forced_fumbles; }
+            get { return _turnovers; }
         }
 
+        public int Punt_Count
+        {
+            get { return _punt_count; }
+        }
+
+        public int Punt_Yards
+        {
+            get { return _punt_yards; }
+        }
+
+        public int Punt_Average
+        {
+            get { return _punt_average; }
+        }
+        
         #endregion
 
         public Team_Stat()
         { }
 
-        public Team_Stat(int wk, int yr, int wins, int losses, int rushyrds, int passyrds, int recyards, int tds, int sacks, int forcedfumbles, int interceptions, int id = 0)
+        public Team_Stat(int wk, int yr, int rushyrds, int passyrds, int firstdowns, int totalyds, int pen_count, int pen_yds, int turnovers, int punt_count, int punt_yds, int punt_avg, int id = 0)
         {
             _week = wk;
             _year = yr;
-            _wins = wins;
-            _losses = losses;
             _rush_yards = rushyrds;
             _pass_yards = passyrds;
-            _receiving_yards = recyards;
-            _tds = tds;
-            _sacks = sacks;
-            _forced_fumbles = forcedfumbles;
-            _interceptions = interceptions;
+            _first_downs = firstdowns;
+            _total_yards = totalyds;
+            _penalty_count = pen_count;
+            _penalty_yards = pen_yds;
+            _turnovers = turnovers;
+            _punt_count = punt_count;
+            _punt_yards = punt_yds;
+            _punt_average = punt_avg;
             _id = id;
         }
 
@@ -107,15 +113,16 @@ namespace DatabaseModels
 
             fields.Add("Week");
             fields.Add("Year");
-            fields.Add("Wins");
-            fields.Add("Losses");
             fields.Add("Rush_Yards");
             fields.Add("Pass_Yards");
-            fields.Add("Receiving_Yards");
-            fields.Add("TDs");
-            fields.Add("Sacks");
-            fields.Add("Interceptions");
-            fields.Add("Forced_Fumbles");
+            fields.Add("First_Downs");
+            fields.Add("Total_Yards");
+            fields.Add("Penalty_Count");
+            fields.Add("Penalty_Yards");
+            fields.Add("Turnovers");
+            fields.Add("Punt_Count");
+            fields.Add("Punt_Yards");
+            fields.Add("Punt_Average");
         }
 
         public List<KeyValuePair<string, object>> GetKeyValuePairs(bool need_id = false, string suffix = "")
@@ -127,15 +134,16 @@ namespace DatabaseModels
             
             parameters.Add(new KeyValuePair<string, object>("Week" + suffix, _week));
             parameters.Add(new KeyValuePair<string, object>("Year" + suffix, _year));
-            parameters.Add(new KeyValuePair<string, object>("Wins" + suffix, _wins));
-            parameters.Add(new KeyValuePair<string, object>("Losses" + suffix, _losses));
             parameters.Add(new KeyValuePair<string, object>("Rush_Yards" + suffix, _rush_yards));
             parameters.Add(new KeyValuePair<string, object>("Pass_Yards" + suffix, _pass_yards));
-            parameters.Add(new KeyValuePair<string, object>("Receiving_Yards" + suffix, _receiving_yards));
-            parameters.Add(new KeyValuePair<string, object>("TDs" + suffix, _tds));
-            parameters.Add(new KeyValuePair<string, object>("Sacks" + suffix, _sacks));
-            parameters.Add(new KeyValuePair<string, object>("Interceptions" + suffix, _interceptions));
-            parameters.Add(new KeyValuePair<string, object>("Forced_Fumbles" + suffix, _forced_fumbles));
+            parameters.Add(new KeyValuePair<string, object>("First_Downs" + suffix, _first_downs));
+            parameters.Add(new KeyValuePair<string, object>("Total_Yards" + suffix, _total_yards));
+            parameters.Add(new KeyValuePair<string, object>("Penalty_Count" + suffix, _penalty_count));
+            parameters.Add(new KeyValuePair<string, object>("Penalty_Yards" + suffix, _penalty_yards));
+            parameters.Add(new KeyValuePair<string, object>("Turnovers" + suffix, _turnovers));
+            parameters.Add(new KeyValuePair<string, object>("Punt_Count" + suffix, _punt_count));
+            parameters.Add(new KeyValuePair<string, object>("Punt_Yards" + suffix, _punt_yards));
+            parameters.Add(new KeyValuePair<string, object>("Punt_Average" + suffix, _punt_average));
 
             return parameters;
         }
