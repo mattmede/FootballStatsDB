@@ -81,7 +81,7 @@ namespace PlayerStatsInserter
             name = name.Replace(@"'", @"''");
 
             string find_player_id_command = @"SELECT Player_Id FROM Players WHERE Player_Name = '" + name + @"';";
-            SqlConnection connection = new SqlConnection(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             SqlCommand command = new SqlCommand(find_player_id_command, connection);
 

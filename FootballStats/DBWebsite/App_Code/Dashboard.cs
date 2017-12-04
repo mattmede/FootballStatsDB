@@ -22,6 +22,7 @@ public class Dashboard
 
         connection.Open();
         var reader = command.ExecuteReader();
+        var playerIds = new List<int>();
         var players = new List<Player>();
         var user = new User();
 
@@ -47,11 +48,26 @@ public class Dashboard
         {
             while (reader.Read())
             {
-                var player = new Player(reader.GetInt32(2), reader.GetString(1), reader.GetInt32(0));
-                players.Add(player);
+                var player = reader.GetInt32(1);
+                playerIds.Add(player);
             }
         }
 
+        connection.Close();
+        foreach (int p in playerIds)
+        {
+            string getPlayers = "SELECT * FROM Players WHERE Player_Id = " + p;
+            command = new SqlCommand(getPlayers, connection);
+
+            connection.Open();
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                players.Add(new Player(reader.GetInt32(2), reader.GetString(1), reader.GetInt32(0)));
+            }
+            connection.Close();
+        }
         connection.Close();
 
         return players;

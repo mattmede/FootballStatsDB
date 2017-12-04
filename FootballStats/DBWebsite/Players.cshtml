@@ -1,29 +1,47 @@
 ﻿@using DatabaseModels;
 @{
-    Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Football Stats DB";
-    var players = LoadPlayers.GetPlayers();
-    var last = players.Count - 1;
-    var count = 0;
+        Layout = "~/_SiteLayout.cshtml";
+        Page.Title = "Football Stats DB";
+        var players = LoadPlayers.GetPlayers();
+        var dash = new Dashboard();
+        var last = players.Count - 1;
+        var count = 0;
+        string addPlayer = null;
 
-    if (IsPost)
-    {
-        Session["PlayerSearch"] = Request.Form["search"];
-        Response.Redirect("~/Players");
+        if (IsPost)
+        {
+            switch (Request.Form["btn"])
+            {
+                case "Search":
+                Session["PlayerSearch"] = Request.Form["search"];
+                Response.Redirect("~/Players");
+                break;
+
+                case "Add":
+                addPlayer = Request.Form["addField"];
+                dash.addFavPlayer(addPlayer, Session["Username"].ToString());
+                break;
+            }
+        }
     }
-}
+
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
 
 <form method="post" style="float:right">
     <input type="text" placeholder="Search" name="search" />
-    <input type="submit" name="Submit" />
+    <input type="submit" name="btn" value="Search"/>
 </form>
 
 <h2>Players</h2>
 
-<table>
+<form method="post">
+<table class="center" id="players">
     <tr>
         <th>Player Name</th>
         <th>Player Number</th>
+        <th>Favorites</th>
     </tr>
     @foreach (Player p in players)
     {
@@ -35,7 +53,7 @@
                 <tr>
                     <td>@p.Name</td>
                     <td>@p.Number</td>
-                    <td align="center"><button type="button">Add</button></td>
+                    <td align="center"><input type="submit" name="btn" value="Add" /></td>
                 </tr>
             }
         }
@@ -44,7 +62,7 @@
             <tr>
                 <td>@p.Name</td>
                 <td>@p.Number</td>
-                <td align="center"><button type="button">Add</button></td>
+                <td align="center"><input type="submit" name="btn" value="Add" /></td>
             </tr>
         }
         if(count == last)
@@ -54,3 +72,17 @@
         count++;
     }
 </table>
+    <input type="hidden" id="addField" name="addField" />
+</form>
+
+<script>
+    $(document).ready(function () {
+        var $name = $("#players tr input[type='submit']").on("click", function () {
+            var row = $(this).closest("tr");
+            var name = row.find('td:eq(0)').text();
+            document.getElementById("addField").value = name;
+            alert(document.getElementById("addField").value);
+        });
+    });
+
+</script>
