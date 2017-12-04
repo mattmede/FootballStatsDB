@@ -21,9 +21,14 @@
                 addTeam = Request.Form["addField"];
                 dash.addFavTeam(addTeam, Session["Username"].ToString());
                 break;
+
+            case "Projection":
+                Session["TeamProj"] = Request.Form["addField"];
+                Response.Redirect("~/Projection");
+                break;
         }
     }
-}
+    }
 
 <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
@@ -41,42 +46,44 @@
         <tr>
             <th>Team Name</th>
             @if (Session["Username"] != null)
-            {
+    {
                 <th>Favorites</th>
             }
         </tr>
         @foreach (Team t in teams)
+    {
+        if (Session["TeamSearch"] != null)
         {
-            if (Session["TeamSearch"] != null)
+            var team = Session["TeamSearch"].ToString();
+            if (t.Name.IndexOf(@team, StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                var team = Session["TeamSearch"].ToString();
-                if (t.Name.IndexOf(@team, StringComparison.OrdinalIgnoreCase) >= 0)
-                {
                     <tr>
                         <td>@t.Name</td>
                         @if (Session["Username"] != null)
                         {
                             <td align="center"><input type="submit" name="btn" value="Add" /></td>
                         }
+                        <td align="center"><input type="submit" name="btn" value="Projection" /></td>
                     </tr>
                 }
-            }
-            else
-            {
+        }
+        else
+        {
                 <tr>
                     <td>@t.Name</td>
                     @if (Session["Username"] != null)
                     {
                         <td align="center"><input type="submit" name="btn" value="Add" /></td>
                     }
+                    <td align="center"><input type="submit" name="btn" value="Projection" /></td>
                 </tr>
             }
-            if (count == last)
-            {
-                Session["TeamSearch"] = null;
-            }
-            count++;
+        if (count == last)
+        {
+            Session["TeamSearch"] = null;
         }
+        count++;
+    }
     </table>
     <input type="hidden" id="addField" name="addField" />
 </form>

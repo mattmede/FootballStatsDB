@@ -1,30 +1,59 @@
-﻿@{
+﻿@using DatabaseModels;
+@{
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Football Stats DB";
 
     var player = "";
-
+    var team = "";
+    var projections = new StatProjection();
+    Player_Stat playerStats = null;
+    Team_Stat teamStats = null;
     //Session["PlayerProj"] = "Mike Evans";
 
     if (Session["PlayerProj"] != null)
     {
         player = Session["PlayerProj"].ToString();
+        Session["PlayerProj"] = null;
+        playerStats = projections.GetProjectedPlayerStats(player);
     }
 
-    var projections = new StatProjection();
-    var playerStats = projections.GetProjectedStats(player);
+    if (Session["TeamProj"] != null)
+    {
+        team = Session["TeamProj"].ToString();
+        Session["TeamProj"] = null;
+        teamStats = projections.GetProjectedTeamStats(team);
+    }
+
 }
 
-<h2>@player</h2>
-<p>
-    Projected Rush Yards: @playerStats.Rush_Yards <br/>
-    Projected Pass Yards: @playerStats.Pass_Yards <br />
-    Projected Receiving Yards: @playerStats.Receiving_Yards <br />
-    Projected Touchdowns: @playerStats.TDs <br />
-    Projected Fumbles: @playerStats.Fumbles <br />
-    Projected Interceptions Thrown: @playerStats.Interceptions_Thrown <br />
-    Projected Tackles: @playerStats.Tackles <br />
-    Projected Forced Fumbles: @playerStats.Forced_Fumbles <br />
-    Projected Interceptions: @playerStats.Interceptions <br />
-    Projected Sacks: @playerStats.Sacks <br />
-</p>
+
+@if (player != "" && player != null)
+{
+    <h2>@player</h2>
+    <p>
+        Projected Rush Yards: @playerStats.Rush_Yards <br />
+        Projected Pass Yards: @playerStats.Pass_Yards <br />
+        Projected Receiving Yards: @playerStats.Receiving_Yards <br />
+        Projected Touchdowns: @playerStats.TDs <br />
+        Projected Fumbles: @playerStats.Fumbles <br />
+        Projected Interceptions Thrown: @playerStats.Interceptions_Thrown <br />
+        Projected Tackles: @playerStats.Tackles <br />
+        Projected Forced Fumbles: @playerStats.Forced_Fumbles <br />
+        Projected Interceptions: @playerStats.Interceptions <br />
+        Projected Sacks: @playerStats.Sacks <br />
+    </p>
+}
+
+@if (team != "" && team != null)
+{
+    <h2>@team</h2>
+    <p>
+        Projected Rush Yards: @teamStats.Rush_Yards <br />
+        Projected Pass Yards: @teamStats.Pass_Yards <br />
+        Projected Receiving Yards: @teamStats.Receiving_Yards <br />
+        Projected Touchdowns: @teamStats.TDs <br />
+        Projected Forced Fumbles: @teamStats.Forced_Fumbles <br />
+        Projected Interceptions: @teamStats.Interceptions <br />
+        Projected Sacks: @teamStats.Sacks <br />
+    </p>
+}

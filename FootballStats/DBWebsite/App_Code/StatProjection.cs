@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DatabaseModels;
 using System.Data.SqlClient;
+using System.Linq;
+using DatabaseModels;
 
 /// <summary>
 /// Summary description for StatProjection
@@ -180,7 +181,7 @@ public class StatProjection
 
     private Team_Stat GetTeamStat(int id)
     {
-        string get_stats_command = "SELECT (Rush_Yards, Pass_Yards, First_Downs, Total_Yards, Penalty_Count, Penalty_Yards, Turnovers, Punt_Count, Punt_Yards, Punt_Average) FROM Team_Stats WHERE Team_Stat_Id = " + id;
+        string get_stats_command = "SELECT Rush_Yards, Pass_Yards, First_Downs, Total_Yards, Penalty_Count, Penalty_Yards, Turnovers, Punt_Count, Punt_Yards, Punt_Average FROM Team_Stats WHERE Team_Stat_Id = " + id;
         SqlCommand command = new SqlCommand(get_stats_command, connection);
 
         connection.Open();
@@ -204,18 +205,19 @@ public class StatProjection
 
         foreach (int id in stat_ids)
         {
-            Team_Stat stat = GetTeamStat(id);
+            Team_Stat stat = new Team_Stat();
+                stat = GetTeamStat(id);
 
             rush_yards += stat.Rush_Yards;
             pass_yards += stat.Pass_Yards;
-            first_downs += stat.First_Downs;
-            total_yards += stat.Total_Yards;
-            penalty_count += stat.Penalty_Count;
-            penalty_yards += stat.Penalty_Yards;
-            turnovers += stat.Turnovers;
-            punt_count += stat.Punt_Count;
-            punt_yards += stat.Punt_Yards;
-            punt_average += stat.Punt_Average;
+            //first_downs += stat.First_Downs;
+            //total_yards += stat.Total_Yards;
+            //penalty_count += stat.Penalty_Count;
+            //penalty_yards += stat.Penalty_Yards;
+            //turnovers += stat.Turnovers;
+            //punt_count += stat.Punt_Count;
+            //punt_yards += stat.Punt_Yards;
+            //punt_average += stat.Punt_Average;
 
         }
 
@@ -230,6 +232,8 @@ public class StatProjection
         punt_yards /= stat_ids.Count;
         punt_average /= stat_ids.Count;
 
-        return new Team_Stat(0, 2016, rush_yards, pass_yards, first_downs, total_yards, penalty_count, penalty_yards, turnovers, punt_count, punt_yards, punt_average);
+        var  teamstat = new Team_Stat(0, 2016, rush_yards, pass_yards, first_downs, total_yards, penalty_count, penalty_yards, turnovers, punt_count, punt_yards, punt_average);
+
+        return teamstat;
     }
 }
