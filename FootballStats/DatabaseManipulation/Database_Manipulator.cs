@@ -11,7 +11,7 @@ namespace DatabaseManipulation
 {
     public class Database_Manipulator
     {
-        private SqlConnection connection = new SqlConnection(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        private SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         private SqlConnection connection2 = new SqlConnection(@"Server=tcp:footballstatsdb.database.windows.net,1433;Initial Catalog=FootballStatsDB;Persist Security Info=False;User ID={mattmede};Password={Sltbmrcv23};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 

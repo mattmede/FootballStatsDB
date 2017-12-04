@@ -3,24 +3,41 @@
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Football Stats DB";
     var teams = LoadTeams.GetTeams();
+    var dash = new Dashboard();
     var last = teams.Count - 1;
     var count = 0;
+    string addTeam = null;
 
     if (IsPost)
     {
-        Session["TeamSearch"] = Request.Form["search"];
-        Response.Redirect("~/Teams");
+        switch (Request.Form["btn"])
+        {
+            case "Search":
+                Session["TeamSearch"] = Request.Form["search"];
+                Response.Redirect("~/Teams");
+                break;
+
+                case "Add":
+                addTeam = Request.Form["addField"];
+                dash.addFavTeam(addTeam, Session["Username"].ToString());
+                break;
+        }
     }
 }
 
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
+
 <form method="post" style="float:right">
     <input type="text" placeholder="Search" name="search" />
-    <input type="submit" name="Submit" />
+    <input type="submit" name="btn" value="Search" />
 </form>
 
 <h2>Teams</h2>
 
-<table class="center">
+<form method="post">
+<table class="center" id="teams">
     <tr>
         <th>Team Name</th>
         <th>Favorites</th>
@@ -34,7 +51,7 @@
             {
                 <tr>
                     <td>@t.Name</td>
-                    <td align="center"><button type="button">Add</button></td>
+                    <td align="center"><input type="submit" name="btn" value="Add" /></td>
                 </tr>
             }
         }
@@ -42,7 +59,7 @@
         {
             <tr>
                 <td>@t.Name</td>
-                <td align="center"><button type="button">Add</button></td>
+                <td align="center"><input type="submit" name="btn" value="Add" /></td>
             </tr>
         }
         if(count == last)
@@ -52,3 +69,16 @@
         count++;
     }
 </table>
+    <input type="hidden" id="addField" name="addField" />
+    </form>
+<script>
+    $(document).ready(function () {
+        var $name = $("#teams tr input[type='submit']").on("click", function () {
+            var row = $(this).closest("tr");
+            var name = row.find('td:eq(0)').text();
+            document.getElementById("addField").value = name;
+            alert(document.getElementById("addField").value);
+        });
+    });
+
+</script>
