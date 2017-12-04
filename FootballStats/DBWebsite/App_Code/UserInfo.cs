@@ -94,7 +94,29 @@ public class UserInfo
         }
         connection.Close();
 
-        if(id != null)
+        if (id != null)
+        {
+            command_string = "DELETE FROM Fav_Player WHERE User_Id = " + id;
+        }
+
+        command = new SqlCommand(command_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+        connection.Close();
+
+        if (id != null)
+        {
+            command_string = "DELETE FROM Fav_Team WHERE User_Id = " + id;
+        }
+
+        command = new SqlCommand(command_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+        connection.Close();
+
+        if (id != null)
         {
             command_string = "DELETE FROM Users WHERE User_Id = " + id + " AND Username = \'" + username +"\'";
         }

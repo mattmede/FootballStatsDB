@@ -17,7 +17,7 @@
                 Response.Redirect("~/Teams");
                 break;
 
-                case "Add":
+            case "Add":
                 addTeam = Request.Form["addField"];
                 dash.addFavTeam(addTeam, Session["Username"].ToString());
                 break;
@@ -37,40 +37,49 @@
 <h2>Teams</h2>
 
 <form method="post">
-<table class="center" id="teams">
-    <tr>
-        <th>Team Name</th>
-        <th>Favorites</th>
-    </tr>
-    @foreach (Team t in teams)
-    {
-        if (Session["TeamSearch"] != null)
+    <table class="center" id="teams">
+        <tr>
+            <th>Team Name</th>
+            @if (Session["Username"] != null)
+            {
+                <th>Favorites</th>
+            }
+        </tr>
+        @foreach (Team t in teams)
         {
-            var team = Session["TeamSearch"].ToString();
-            if (t.Name.IndexOf(@team, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (Session["TeamSearch"] != null)
+            {
+                var team = Session["TeamSearch"].ToString();
+                if (t.Name.IndexOf(@team, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    <tr>
+                        <td>@t.Name</td>
+                        @if (Session["Username"] != null)
+                        {
+                            <td align="center"><input type="submit" name="btn" value="Add" /></td>
+                        }
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
                     <td>@t.Name</td>
-                    <td align="center"><input type="submit" name="btn" value="Add" /></td>
+                    @if (Session["Username"] != null)
+                    {
+                        <td align="center"><input type="submit" name="btn" value="Add" /></td>
+                    }
                 </tr>
             }
+            if (count == last)
+            {
+                Session["TeamSearch"] = null;
+            }
+            count++;
         }
-        else
-        {
-            <tr>
-                <td>@t.Name</td>
-                <td align="center"><input type="submit" name="btn" value="Add" /></td>
-            </tr>
-        }
-        if(count == last)
-        {
-            Session["TeamSearch"] = null;
-        }
-        count++;
-    }
-</table>
+    </table>
     <input type="hidden" id="addField" name="addField" />
-    </form>
+</form>
 <script>
     $(document).ready(function () {
         var $name = $("#teams tr input[type='submit']").on("click", function () {

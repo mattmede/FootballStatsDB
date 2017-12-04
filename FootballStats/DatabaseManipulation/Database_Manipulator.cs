@@ -107,7 +107,7 @@ namespace DatabaseManipulation
 
         public List<Player> SelectAllEntries()
         {
-            SqlCommand command = new SqlCommand("SELECT Player_Number, Player_Name, Player_Id FROM Players", connection);
+            SqlCommand command = new SqlCommand("SELECT Player_Number, Player_Name, Player_Id FROM Players ORDER BY Player_Name", connection);
 
             var players = new List<Player>();
 
