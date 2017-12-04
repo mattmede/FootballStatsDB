@@ -65,6 +65,7 @@ public class Dashboard
 
         connection.Open();
         var reader = command.ExecuteReader();
+        var teamIds = new List<int>();
         var teams = new List<Team>();
         var user = new User();
 
@@ -90,13 +91,131 @@ public class Dashboard
         {
             while (reader.Read())
             {
-                var player = new Team(reader.GetString(1), reader.GetInt32(0));
-                teams.Add(player);
+                var team = reader.GetInt32(1);
+                teamIds.Add(team);
             }
         }
 
         connection.Close();
 
+        foreach (int t in teamIds)
+        {
+            string getTeams = "SELECT * FROM Teams WHERE Team_Id = " + t;
+            command = new SqlCommand(getTeams, connection);
+
+            connection.Open();
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                teams.Add(new Team(reader.GetString(1), reader.GetInt32(0)));
+            }
+            connection.Close();
+        }
+        connection.Close();
+
         return teams;
+    }
+
+    public void addFavPlayer(string player_name, string username)
+    {
+        var player_id = 0;
+
+        //get player
+
+        string getPlayer = "SELECT Player_Id FROM Players WHERE Player_Name = \'" + player_name + "\'";
+
+        SqlCommand command = new SqlCommand(getPlayer, connection);
+
+        connection.Open();
+        var reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            player_id = reader.GetInt32(0);
+        }
+
+        connection.Close();
+
+        //get user
+
+        string user_string = "SELECT * FROM Users WHERE Username = \'" + username + "\'";
+
+        command = new SqlCommand(user_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+        var user = new User();
+
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                user = new User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0));
+            }
+        }
+
+        connection.Close();
+
+        //insert fav player entry
+
+        string insert_string = "INSERT INTO Fav_Player (Player_Id, User_Id) VALUES (" + player_id + "," + user.Id + ")";
+
+        command = new SqlCommand(insert_string, connection);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+    }
+
+    public void addFavTeam(string team_name, string username)
+    {
+        var team_id = 0;
+
+        //get player
+
+        string getTeam = "SELECT Team_Id FROM Teams WHERE Team_Name = \'" + team_name + "\'";
+
+        SqlCommand command = new SqlCommand(getTeam, connection);
+
+        connection.Open();
+        var reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            team_id = reader.GetInt32(0);
+        }
+
+        connection.Close();
+
+        //get user
+
+        string user_string = "SELECT * FROM Users WHERE Username = \'" + username + "\'";
+
+        command = new SqlCommand(user_string, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+        var user = new User();
+
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                user = new User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0));
+            }
+        }
+
+        connection.Close();
+
+        //insert fav player entry
+
+        string insert_string = "INSERT INTO Fav_Team (Team_Id, User_Id) VALUES (" + team_id + "," + user.Id + ")";
+
+        command = new SqlCommand(insert_string, connection);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
     }
 }
