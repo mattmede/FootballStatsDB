@@ -277,4 +277,95 @@ public class Dashboard
         command.ExecuteNonQuery();
         connection.Close();
     }
+
+    public void deletePlayer(string player_name, string username)
+    {
+
+        string user_string = "SELECT * FROM Users WHERE Username = \'" + username + "\'";
+
+        var command = new SqlCommand(user_string, connection);
+
+        connection.Open();
+        var reader = command.ExecuteReader();
+        var user = new User();
+        var player_id = 0;
+
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                user = new User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0));
+            }
+        }
+
+        connection.Close();
+
+        string getPlayer = "SELECT Player_Id FROM Players WHERE Player_Name = \'" + player_name + "\'";
+
+        command = new SqlCommand(getPlayer, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            player_id = reader.GetInt32(0);
+        }
+
+        connection.Close();
+
+        string delete = "DELETE FROM Fav_Player WHERE Player_Id = " + player_id + " AND User_Id = " + user.Id;
+
+        command = new SqlCommand(delete, connection);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+    }
+
+    public void deleteTeam(string team_name, string username)
+    {
+
+        string user_string = "SELECT * FROM Users WHERE Username = \'" + username + "\'";
+
+        var command = new SqlCommand(user_string, connection);
+
+        connection.Open();
+        var reader = command.ExecuteReader();
+        var user = new User();
+        var team_id = 0;
+
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                user = new User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0));
+            }
+        }
+
+        connection.Close();
+
+        string getTeam = "SELECT Team_Id FROM Teams WHERE Team_Name = \'" + team_name + "\'";
+
+        command = new SqlCommand(getTeam, connection);
+
+        connection.Open();
+        reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            team_id = reader.GetInt32(0);
+        }
+
+        connection.Close();
+
+        string delete = "DELETE FROM Fav_Team WHERE Team_Id = " + team_id + " AND User_Id = " + user.Id;
+
+        command = new SqlCommand(delete, connection);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+    }
 }
+

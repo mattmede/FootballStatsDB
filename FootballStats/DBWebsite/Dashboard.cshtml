@@ -7,30 +7,47 @@
     List<StatPlayer> players = new List<StatPlayer>();
     List<Team> teams = new List<Team>();
 
-    if (Session["username"] != null)
+    if (Session["Username"] != null)
     {
-        players = dashboard.getFavoritePlayers(Session["username"].ToString());
-        teams = dashboard.getFavoriteTeams(Session["username"].ToString());
+        players = dashboard.getFavoritePlayers(Session["Username"].ToString());
+        teams = dashboard.getFavoriteTeams(Session["Username"].ToString());
     }
 
-}
+    if (IsPost)
+    {
+        switch (Request.Form["btn"])
+        {
+            case "Delete Player":
+                //do something to delete
+                dashboard.deletePlayer(Request.Form["deletePlayerField"], Session["Username"].ToString());
+                Response.Redirect("~/Dashboard.cshtml");
+                break;
+
+            case "Delete Team":
+                dashboard.deleteTeam(Request.Form["deleteTeamField"], Session["Username"].ToString());
+                Response.Redirect("~/Dashboard.cshtml");
+                break;
+        }
+    }
+            }
 
 <h1>@Page.Title</h1>
 
 @if (Session["Username"] == null)
-{
+            {
     <h3><a href="~/Account/Login.cshtml">Login</a> to view favorite players and teams.</h3>
 }
 else
 {
     <h2>Favorite Players</h2>
     if (!players.Any())
-    {
+            {
         <h3>Add favorite players <a href="~/Players.cshtml">here</a>.</h3>
     }
     else
     {
-        <table class="center">
+        <form method="post">
+        <table class="center" id="players">
             <tr>
                 <th>Player</th>
                 <th>Number</th>
@@ -51,19 +68,22 @@ else
                     <td>@summedStats.tds</td>
                     <td>@summedStats.sacks</td>
                     <td>@summedStats.interceptions</td>
-                    <td><button type="button">Delete</button></td>
+                    <td><input type="submit" name="btn" value="Delete Player" /></td>
                 </tr>
             }
         </table>
+            <input type="hidden" id="deletePlayerField" name="deletePlayerField" />
+            </form>
     }
     <h2>Favorite Teams</h2>
     if (!teams.Any())
-    {
+        {
         <h3>Add favorite teams <a href="~/Teams.cshtml">here</a>.</h3>
     }
     else
     {
-        <table class="center">
+        <form method="post">
+        <table class="center" id="teams">
             <tr>
                 <th>Team</th>
                 <th>Record</th>
@@ -72,15 +92,37 @@ else
                 <th>Remove</th>
             </tr>
             @foreach (Team t in teams)
-            {
+        {
                 <tr>
                     <td>@t.Name</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><button type="button">Remove</button></td>
+                    <td><input type="submit" name="btn" value="Delete Team" /></td>
                 </tr>
             }
         </table>
+            <input type="hidden" id="deleteTeamField" name="deleteTeamField" />
+            </form>
     }
 }
+
+<script>
+    $(document).ready(function () {
+        var $name = $("#players tr input[type='submit']").on("click", function () {
+            var row = $(this).closest("tr");
+            var name = row.find('td:eq(0)').text();
+            document.getElementById("deletePlayerField").value = name;
+            //alert(document.getElementById("deletePlayerField").value);
+        });
+    });
+    $(document).ready(function () {
+        var $name = $("#teams tr input[type='submit']").on("click", function () {
+            var row = $(this).closest("tr");
+            var name = row.find('td:eq(0)').text();
+            document.getElementById("deleteTeamField").value = name;
+            //alert(document.getElementById("deleteTeamField").value);
+        });
+    });
+
+</script>
