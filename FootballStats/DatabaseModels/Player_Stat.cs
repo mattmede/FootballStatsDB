@@ -8,8 +8,8 @@ namespace DatabaseModels
 {
     public class Player_Stat : IDatabaseEntry
     {
-        int _id, _week, _year, _rush_yards, _pass_yards, _receiving_yards, _tds, _fumbles, _interceptions_thrown, _tackles, _sacks, _forced_fumbles, _interceptions;
-
+        int _id, _week, _year, _rush_yards, _pass_yards, _receiving_yards, _tds, _fumbles, _interceptions_thrown, _tackles, _forced_fumbles, _interceptions;
+        double _sacks;
         #region ' Properties '
 
         public int Id
@@ -62,7 +62,7 @@ namespace DatabaseModels
             get { return _tackles; }
         }
 
-        public int Sacks
+        public double Sacks
         {
             get { return _sacks; }
         }
@@ -82,7 +82,7 @@ namespace DatabaseModels
         public Player_Stat()
         { }
 
-        public Player_Stat(int wk, int yr, int rushyrds, int passyrds, int recyards, int tds, int fumbles, int intercep_thrown, int tackles, int sacks, int forcedfumbles, int interceptions, int id = 0)
+        public Player_Stat(int wk, int yr, int rushyrds, int passyrds, int recyards, int tds, int fumbles, int intercep_thrown, int tackles, double sacks, int forcedfumbles, int interceptions, int id = 0)
         {
             _week = wk;
             _year = yr;
