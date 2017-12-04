@@ -1,28 +1,28 @@
 ﻿@using DatabaseModels;
 @{
-        Layout = "~/_SiteLayout.cshtml";
-        Page.Title = "Football Stats DB";
-        var players = LoadPlayers.GetPlayers();
-        var dash = new Dashboard();
-        var last = players.Count - 1;
-        var count = 0;
-        string addPlayer = null;
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Football Stats DB";
+    var players = LoadPlayers.GetPlayers();
+    var dash = new Dashboard();
+    var last = players.Count - 1;
+    var count = 0;
+    string addPlayer = null;
 
-        if (IsPost)
+    if (IsPost)
+    {
+        switch (Request.Form["btn"])
         {
-            switch (Request.Form["btn"])
-            {
-                case "Search":
+            case "Search":
                 Session["PlayerSearch"] = Request.Form["search"];
                 Response.Redirect("~/Players");
                 break;
 
-                case "Add":
+            case "Add":
                 addPlayer = Request.Form["addField"];
                 dash.addFavPlayer(addPlayer, Session["Username"].ToString());
                 break;
-            }
         }
+    }
     }
 
 <head>
@@ -41,18 +41,27 @@
     <tr>
         <th>Player Name</th>
         <th>Player Number</th>
+        <th>Total Yards</th>
+        <th>TDs</th>
+        <th>Sacks</th>
+        <th>Interceptions</th>
         <th>Favorites</th>
     </tr>
-    @foreach (Player p in players)
+    @foreach (StatPlayer p in players)
     {
+        var summedStats = new SummedPlayerStats(p.player_stats);
         if (Session["PlayerSearch"] != null)
         {
             var player = Session["PlayerSearch"].ToString();
-            if (p.Name.IndexOf(@player, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (p.player.Name.IndexOf(@player, StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 <tr>
-                    <td>@p.Name</td>
-                    <td>@p.Number</td>
+                    <td>@p.player.Name</td>
+                    <td>@p.player.Number</td>
+                    <td>@summedStats.total_yards</td>
+                    <td>@summedStats.tds</td>
+                    <td>@summedStats.sacks</td>
+                    <td>@summedStats.interceptions</td>
                     <td align="center"><input type="submit" name="btn" value="Add" /></td>
                 </tr>
             }
@@ -60,8 +69,12 @@
         else
         {
             <tr>
-                <td>@p.Name</td>
-                <td>@p.Number</td>
+                <td>@p.player.Name</td>
+                <td>@p.player.Number</td>
+                <td>@summedStats.total_yards</td>
+                <td>@summedStats.tds</td>
+                <td>@summedStats.sacks</td>
+                <td>@summedStats.interceptions</td>
                 <td align="center"><input type="submit" name="btn" value="Add" /></td>
             </tr>
         }
