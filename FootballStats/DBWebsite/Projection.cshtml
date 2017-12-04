@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Football Stats DB";
+
+    var player = "";
+
+    Session["PlayerProj"] = "Mike Evans";
+
+    if (Session["PlayerProj"] != null)
+    {
+        player = Session["PlayerProj"].ToString();
+    }
+
+    var projections = new StatProjection();
+    var playerStats = projections.GetProjectedStats(player);
+}
+
+<h2>@player</h2>
+<p>
+    Projected Rush Yards: @playerStats.Rush_Yards <br/>
+    Projected Pass Yards: @playerStats.Pass_Yards <br />
+    Projected Receiving Yards: @playerStats.Receiving_Yards <br />
+    Projected Touchdowns: @playerStats.TDs <br />
+    Projected Fumbles: @playerStats.Fumbles <br />
+    Projected Interceptions Thrown: @playerStats.Interceptions_Thrown <br />
+    Projected Tackles: @playerStats.Tackles <br />
+    Projected Forced Fumbles: @playerStats.Forced_Fumbles <br />
+    Projected Interceptions: @playerStats.Interceptions <br />
+    Projected Sacks: @playerStats.Sacks <br />
+</p>

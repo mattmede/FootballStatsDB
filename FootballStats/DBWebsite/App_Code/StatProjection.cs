@@ -73,7 +73,7 @@ public class StatProjection
 
     private Player_Stat GetPlayerStat(int id)
     {
-        string get_stats_command = "SELECT (Rush_Yards, Pass_Yards, Receiving_Yards, TDs, Fumbles, Interceptions_Thrown, Tackles, Sacks, Forced_Fumbles, Interceptions) FROM Player_Stats WHERE Player_Stat_Id = " + id;
+        string get_stats_command = "SELECT Rush_Yards, Pass_Yards, Receiving_Yards, TDs, Fumbles, Interceptions_Thrown, Tackles, Sacks, Forced_Fumbles, Interceptions FROM Player_Stats WHERE Player_Stat_Id = " + id;
         SqlCommand command = new SqlCommand(get_stats_command, connection);
 
         connection.Open();
