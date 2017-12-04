@@ -36,7 +36,7 @@ namespace TeamStatsInserter
 
         }
 
-        static KeyValuePair<int,Team_Stat> ParseLine(string line)
+        static KeyValuePair<int, Team_Stat> ParseLine(string line)
         {
             string[] split_line = line.Split(' ');
 
@@ -68,7 +68,9 @@ namespace TeamStatsInserter
             int punt_average = GetStatValue(punt_average_index, split_line);
 
             string find_player_id_command = @"SELECT Team_Id FROM Teams WHERE Team_Name = '" + name + @"';";
-            SqlConnection connection = new SqlConnection(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(local);Initial Catalog=FootBallStatsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             SqlCommand command = new SqlCommand(find_player_id_command, connection);
 

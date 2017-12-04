@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DataBaseModels;
+using DatabaseModels;
 using System.Data.SqlClient;
 
 /// <summary>
@@ -73,7 +73,7 @@ public class StatProjection
 
     private Player_Stat GetPlayerStat(int id)
     {
-        string get_stats_command = "SELECT (Rush_Yards, Pass_Yards, Receiving_Yards, TDs, Fumbles, Interceptions_Thrown, Tackles, Sacks, Forced_Fubmles, Interceptions) FROM Player_Stats WHERE Player_Stat_Id = " + id;
+        string get_stats_command = "SELECT (Rush_Yards, Pass_Yards, Receiving_Yards, TDs, Fumbles, Interceptions_Thrown, Tackles, Sacks, Forced_Fumbles, Interceptions) FROM Player_Stats WHERE Player_Stat_Id = " + id;
         SqlCommand command = new SqlCommand(get_stats_command, connection);
 
         connection.Open();
@@ -94,7 +94,7 @@ public class StatProjection
     private Player_Stat ProjectStats(List<int> stat_ids)
     {
         int rush_yards = 0, pass_yards = 0, receiving_yards = 0, tds = 0, fumbles = 0, interceptions_thrown = 0, tackles = 0, forced_fumbles = 0, interceptions = 0;
-        double sacks = 0;
+        int sacks = 0;
 
         
         foreach(int id in stat_ids)
@@ -109,7 +109,7 @@ public class StatProjection
             interceptions_thrown += stat.Interceptions_Thrown;
             tackles += stat.Tackles;
             sacks += stat.Sacks;
-            forced_fumbles += stat.ForcedFumbles;
+            forced_fumbles += stat.Forced_Fumbles;
             interceptions += stat.Interceptions;
 
         }
